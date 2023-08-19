@@ -8,10 +8,12 @@ pipeline {
                 git url:"https://github.com/sbambal/django-notes-app.git", branch:"main"
             }
         }
-        stage('SonarQube Analysis') {
-            def scannerHome = tool 'SonarScanner';
-            withSonarQubeEnv() {
-                sh "${scannerHome}/bin/sonar-scanner"
+        stage("SonarQube Analysis") {
+            steps {
+                def scannerHome = tool 'SonarScanner';
+                withSonarQubeEnv() {
+                 sh "${scannerHome}/bin/sonar-scanner"
+                }
              }
         }
         stage("Build") {
